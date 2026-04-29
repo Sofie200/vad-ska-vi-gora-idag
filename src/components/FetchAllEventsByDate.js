@@ -1,3 +1,4 @@
+import { FetchActivities } from "./FetchActivities";
 import { FetchKul } from "./FetchKul";
 import { FetchMalmo } from "./FetchMalmo";
 import holidays from "se-bank-holidays";
@@ -8,14 +9,16 @@ export async function FetchAllEventsByDate(date) {
 		const isHoliday = holidays.isMidsummerDay(new Date(date));
 		console.log(isHoliday); // true
 
-		const [kul, malmo] = await Promise.all([
+		const [kul, malmo, activities] = await Promise.all([
 			FetchKul(date),
-			FetchMalmo(date)
+			FetchMalmo(date),
+			FetchActivities()
 		]);
 
 		const combined = [
 			...(kul ?? []),
-			...(malmo ?? [])
+			...(malmo ?? []),
+			...(activities ?? [])
 		];
 
 		console.log("💾 Sparar data i localStorage:", combined);
