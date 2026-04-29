@@ -13,7 +13,9 @@ const DatePicker = ({ handleChange }) => {
     return (
         <div>
             <input type='date'
-                name='pick' min={today}
+                name='pick' 
+                defaultValue={today}
+                min={today}
                 max={maxDate}
                 onChange={(e) => handleChange(e.target.value)}
                 className="date-input" />
