@@ -1,50 +1,51 @@
-export const FetchActivities = async () => {
-  const url = import.meta.env.VITE_SUPABASE_URL;
-  const key = import.meta.env.VITE_SUPABASE_ANON_KEY;
+//import holidays from "se-bank-holidays";
 
-  console.log("▶️ FetchActivities start");
+export const FetchActivities = async (today) => {
 
-  try {
-    const res = await fetch(
-      `${url}/Activities?select=*`,
-      {
-        headers: {
-          apikey: key,
-          Authorization: `Bearer ${key}`,
-        },
-      }
-    );
+    const url = import.meta.env.VITE_SUPABASE_URL;
+    const key = import.meta.env.VITE_SUPABASE_ANON_KEY;
 
-    if (!res.ok) throw new Error("API error: " + res.status);
+    const todayDate = new Date(today);
 
-    const data = await res.json(); // <-- data ÄR arrayen
+    const dayOfWeek = todayDate.getDay();
+    const weekdayArray = ["open_sun","open_mon","open_tue","open_wed","open_thu","open_fri","open_sat"];
 
-    // Normalisera (anpassa efter dina faktiska kolumner)
-    const normalizedItems = data.map(item => ({
-      id: item.id,
-      title: item.title ?? "",
-      desc: item.desc ?? "",
-      image: item.image ?? null,
-      url: item.url ?? "",
-      categories: item.categories.split(', ') ?? [],
-      formatted: item.formatted ?? "",
-      place: item.place ?? "",
-      price: item.price ?? "",
-      open_mon: item.open_mon ?? "",
-      open_tue: item.open_tue ?? "",
-      open_wed: item.open_wed ?? "",
-      open_thu: item.open_thu ?? "",
-      open_fri: item.open_fri ?? "",
-      open_sat: item.open_sat ?? "",
-      open_sun: item.open_sun ?? "",
-    }));
+    console.log("▶️ FetchActivities start");
 
-    console.log(normalizedItems);
+    try {
+        const res = await fetch(
+            `${url}/Activities?${weekdayArray[dayOfWeek]}=eq.true`,
+            {
+                headers: {
+                    apikey: key,
+                    Authorization: `Bearer ${key}`,
+                },
+            }
+        );
 
-    return normalizedItems;
+        if (!res.ok) throw new Error("API error: " + res.status);
 
-  } catch (err) {
-    console.error("❌ FetchActivities error:", err);
-    return null;
-  }
+        const data = await res.json(); // <-- data ÄR arrayen
+
+        // Normalisera (anpassa efter dina faktiska kolumner)
+        const normalizedItems = data.map(item => ({
+            id: item.id,
+            title: item.title ?? "",
+            desc: item.desc ?? "",
+            image: item.image ?? null,
+            url: item.url ?? "",
+            categories: item.categories.split(', ') ?? [],
+            formatted: item.formatted ?? "",
+            place: item.place ?? "",
+            price: item.price ?? "",
+        }));
+
+        console.log(normalizedItems);
+
+        return normalizedItems;
+
+    } catch (err) {
+        console.error("❌ FetchActivities error:", err);
+        return null;
+    }
 };
