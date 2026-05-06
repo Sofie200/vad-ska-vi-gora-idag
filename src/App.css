@@ -241,7 +241,12 @@ body {
   opacity: 0.8;
 }
 
-.date-input {
+#search-bar{
+  display: flex;
+  gap:10px;
+  padding-bottom: 20px;
+}
+.date-input, select {
   appearance: none;
   -webkit-appearance: none;
   background-color: #fff;
