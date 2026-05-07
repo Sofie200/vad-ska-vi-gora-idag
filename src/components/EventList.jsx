@@ -3,12 +3,14 @@ import { FetchAllEventsByDate } from "./FetchAllEventsByDate";
 import EventCard from "./EventCard";
 import DatePicker from "./DatePicker";
 import CategoryPicker from "./CategoryPicker";
+import FreePicker from "./FreePicker";
 
 export default function EventList() {
 
 	const [allItems, setAllItems] = useState([]);
 	const [items, setItems] = useState([]);
 	const [category, setCategory] = useState("");
+	const [free, setFree] = useState(false);
 	const [today, setToday] = useState(() => {
 		return new Date().toISOString().split("T")[0];
 	});
@@ -21,16 +23,31 @@ export default function EventList() {
 		setCategory(pick);
 	}
 
-	useEffect(() => {
+	const toggleFree = (pick) => {
+		setFree(pick);
+	}
 
-		if (!category) {
-			setItems(allItems); // visa allt om ingen kategori är vald
-			return;
+	useEffect(() => {
+		let filtered = allItems;
+
+		// Filtrera kategori om vald
+		if (category) {
+			filtered = filtered.filter(item =>
+				item.categories.includes(category)
+			);
 		}
 
-		const filteredItems = allItems.filter(item => item.categories.includes(category));
-		setItems(filteredItems);
-	}, [category, allItems]);
+		// Filtrera gratis om free === true
+		if (free) {
+			filtered = filtered.filter(item =>
+				item.price === "Gratis"
+			);
+		}
+
+		setItems(filtered);
+
+	}, [category, free, allItems]);
+
 
 	useEffect(() => {
 		const load = async () => {
@@ -49,6 +66,10 @@ export default function EventList() {
 			<div id='search-bar'>
 				<DatePicker handleChange={handleChange} />
 				<CategoryPicker handleSelect={handleSelect} />
+				<FreePicker toggleFree={toggleFree} />
+				<div className="app-badge">
+					{items.length} förslag
+				</div>
 			</div>
 			<div className="grid">
 				{items.map((item, index) => (

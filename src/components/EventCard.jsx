@@ -9,14 +9,15 @@ export default function EventCard({ item }) {
 			</a>
 
 			<h3 className="event-title">{item.title}</h3>
-
-			<p className="event-price">{item.price}</p>
+			<span className="event-date">{item.formatted}</span>
 
 			<p className="event-desc">{item.desc}</p>
 
 			<div className="event-meta">
-				<span className="event-date">{item.formatted}</span>
-				<span className="event-place">{item.place}</span>
+				<p className="event-price">{item.price}</p>
+				<p className="event-place">
+					<span className="event-place-text">{item.place}</span>
+				</p>
 			</div>
 
 			<div className="chips">

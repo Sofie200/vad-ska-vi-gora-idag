@@ -15,7 +15,7 @@ export async function FetchAllEventsByDate(date) {
 			...(kul ?? []),
 			...(malmo ?? []),
 			...(activities ?? [])
-		];
+		].sort(() => Math.random() - 0.5);
 
 		console.log("💾 Sparar data i localStorage:", combined);
 		localStorage.setItem("Items", JSON.stringify(combined));

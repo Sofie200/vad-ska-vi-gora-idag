@@ -66,6 +66,7 @@ body {
   color: var(--lime-dark);
   font-size: 0.8rem;
   font-weight: 600;
+  margin-left: auto;
 }
 
 /* Grid */
@@ -119,23 +120,10 @@ body {
   color: var(--lime-dark);
 }
 
-.event-price {
-  font-size: 0.9rem;
-  line-height: 1.4;
-  color: #355047;
+.event-date {
+  font-size: 0.8rem;
+  color:var(--text-main);
   font-style: italic;
-  margin: 0;
-  display: flex;
-  align-items: center;
-  gap: 2px;
-}
-
-.event-price::before {
-  content: "🪙"; /* mynt-emoji */
-  font-size: 1rem;
-  display: inline-block;
-  font-style: normal;
-  margin-bottom: 3px;
 }
 
 .event-desc {
@@ -178,25 +166,48 @@ body {
   margin-top: 6px;
   font-size: 0.8rem;
   color: #2f4b3f;
+  margin-bottom: 5px;
 }
 
-.event-date {
-  display: inline-flex;
+.event-price {
+  font-size: 0.8rem;
+  color: #355047;
+  margin: 0;
+  display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 2px;
+}
+
+.event-price::before {
+  content: "🪙"; /* mynt-emoji */
+  font-size: 1rem;
+  display: inline-block;
+  font-style: normal;
+  margin-bottom: 3px;
+  margin-left: -2px;
 }
 
 .event-place {
   font-weight: 600;
   display: flex;
   align-items: center;
-  gap: 0px;
+  gap: 2px;
+  min-width: 0; /* viktigt i flex */
+  margin: 0;
 }
 
 .event-place::before {
-  content: "📍"; /* kartnål */
-  font-size: 1rem;
-  display: inline-block;
+  content: "📍";
+  flex-shrink: 0;
+}
+
+/* Här gör vi ellipsis */
+.event-place-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  min-width: 0;
+  flex: 1;
 }
 
 /* Länkknapp */
@@ -243,6 +254,7 @@ body {
 
 #search-bar{
   display: flex;
+  align-items: center;
   gap:10px;
   padding-bottom: 20px;
 }
@@ -283,4 +295,61 @@ body {
 
 .date-input::-webkit-calendar-picker-indicator:hover {
   opacity: 1;
+}
+
+/* Checkbox wrapper */
+.free-toggle {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--lime-dark);
+  user-select: none;
+}
+
+.free-toggle:hover{
+  color:#2f4b3f;
+}
+
+/* Dölj standard-checkboxen */
+.free-toggle input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--lime-main);
+  border-radius: 6px;
+  background: #fff;
+  cursor: pointer;
+  position: relative;
+  transition: background var(--transition-fast), border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+/* Hover-effekt */
+.free-toggle input[type="checkbox"]:hover {
+  border-color: var(--lime-accent);
+}
+
+/* Focus (keyboard navigation) */
+.free-toggle input[type="checkbox"]:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(155, 232, 79, 0.4);
+}
+
+/* När den är ikryssad */
+.free-toggle input[type="checkbox"]:checked {
+  background: var(--lime-main);
+  border-color: var(--lime-accent);
+}
+
+/* Checkmark */
+.free-toggle input[type="checkbox"]:checked::after {
+  content: "✔";
+  color: white;
+  font-size: 14px;
+  position: absolute;
+  top: -2px;
+  left: 3px;
 }
