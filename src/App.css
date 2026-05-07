@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Darumadrop+One&family=Flavors&family=Leckerli+One&family=Love+Ya+Like+A+Sister&display=swap');
+
 :root {
   --lime-light: #f0ffe5;
   --lime-bg: #e4ffd1;
@@ -47,10 +49,13 @@ body {
 }
 
 .app-title {
-  font-size: 2rem;
-  font-weight: 800;
-  letter-spacing: 0.03em;
+  font-family: "Darumadrop One", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 4rem;
+  line-height: normal;
   color: var(--lime-dark);
+  margin: 10px;
 }
 
 .app-title span {
@@ -163,10 +168,9 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 6px;
   font-size: 0.8rem;
   color: #2f4b3f;
-  margin-bottom: 5px;
+  gap:10px
 }
 
 .event-price {
@@ -178,27 +182,47 @@ body {
   gap: 2px;
 }
 
-.event-price::before {
-  content: "🪙"; /* mynt-emoji */
+.price-icons {
+  font-size: 1.1rem; /* öka eller minska efter smak */
+  line-height: 1;
+  letter-spacing: -3px;
+  margin-left: -3px;
+}
+
+/*
+.event-free::before {
+  content: "🪙";
   font-size: 1rem;
   display: inline-block;
   font-style: normal;
   margin-bottom: 3px;
   margin-left: -2px;
+}*/
+
+.event-free{
+  background-color:var(--lime-main);
+  color: var(--lime-light);
+  
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+  font-size: 0.75rem;
+  font-weight: 600;
+
 }
 
 .event-place {
+  font-size: 0.8rem;
   font-weight: 600;
   display: flex;
   align-items: center;
   gap: 2px;
   min-width: 0; /* viktigt i flex */
-  margin: 0;
+  margin: 0 0 0 -5px;
 }
 
 .event-place::before {
   content: "📍";
-  flex-shrink: 0;
+  font-size: 1rem;
 }
 
 /* Här gör vi ellipsis */
@@ -350,6 +374,6 @@ body {
   color: white;
   font-size: 14px;
   position: absolute;
-  top: -2px;
+  top: -1px;
   left: 3px;
 }

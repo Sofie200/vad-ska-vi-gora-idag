@@ -20,7 +20,7 @@ export const FetchMalmo = async (today) => {
       categories: event.categories ?? [],
       formatted: event.dates?.formatted ?? "",
       place: event.place ?? "",
-      price: event.typeOfEvent === "internal" ? "Gratis" : "Okänt"
+      price: event.typeOfEvent === "internal" ? "Gratis" : "-"
     }));
 
     return normalizedItems;
