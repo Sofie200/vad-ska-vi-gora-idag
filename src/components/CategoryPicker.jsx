@@ -2,7 +2,7 @@ const CategoryPicker = ({handleSelect}) => {
     return (
         <select onChange={(e) => handleSelect(e.target.value)}>
             <option value="">Välj kategori...</option>
-            <option value="Djur och natur">Djur och natur</option>
+            <option value="Djur och friluftsliv">Djur och friluftsliv</option>
             <option value="E-sport och spel">E-sport och spel</option>
             <option value="Fri lek">Fri lek</option>
             <option value="Fritid och hobby">Fritid och hobby</option>
