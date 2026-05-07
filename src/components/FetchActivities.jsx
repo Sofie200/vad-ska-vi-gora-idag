@@ -40,8 +40,6 @@ export const FetchActivities = async (today) => {
             price: item.price ?? "",
         }));
 
-        console.log(normalizedItems);
-
         return normalizedItems;
 
     } catch (err) {

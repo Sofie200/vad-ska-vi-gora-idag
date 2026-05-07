@@ -19,7 +19,7 @@ export async function FetchAllEventsByDate(date) {
 
 		console.log("💾 Sparar data i localStorage:", combined);
 		localStorage.setItem("Items", JSON.stringify(combined));
-		console.log("💾 localStorage efter save:", localStorage.getItem("Items"));
+		//console.log("💾 localStorage efter save:", localStorage.getItem("Items"));
 
 		return combined;
 
